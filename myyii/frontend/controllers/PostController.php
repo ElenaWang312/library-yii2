@@ -38,11 +38,15 @@ class PostController extends Controller
         $searchModel = new PostSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
         $model = new post();
-
-        return $this->render('index', [
-            'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider
-        ]);
+        $data = [
+           'searchModel' => $searchModel,
+           'dataProvider' => $dataProvider
+        ];
+        // return $this->render('index', [
+        //     'searchModel' => $searchModel,
+        //     'dataProvider' => $dataProvider
+        // ]);
+        return \yii\helpers\Json::encode($data);
     }
 
     /**
@@ -53,9 +57,11 @@ class PostController extends Controller
      */
     public function actionView($id)
     {
-        return $this->render('view', [
-            'model' => $this->findModel($id),
-        ]);
+        // return $this->render('view', [
+        //     'model' => $this->findModel($id),
+        // ]);
+        $data = ['model' => $this->findModel($id)];
+        return \yii\helpers\Json::encode($data);
     }
 
     /**
